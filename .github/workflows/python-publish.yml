@@ -18,6 +18,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Set up Git LFS
+      run: |
+        git lfs install --skip-repo
+        git lfs pull
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
