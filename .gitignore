@@ -1,3 +1,7 @@
 .vscode
 __pycache__
 .ipynb_checkpoints
+solutions
+dist
+.pytest_cache
+*.egg-info
