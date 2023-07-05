@@ -1,6 +1,7 @@
 # NCS Package - Machine Learning in Business
 
-![Python package](https://github.com/colingwuyu/rotman_ncs/actions/workflows/python-publish.yml/badge.svg)
+![Build and Test](https://github.com/colingwuyu/rotman_ncs/actions/workflows/python-build.yml/badge.svg)
+![Publish](https://github.com/colingwuyu/rotman_ncs/actions/workflows/python-publish.yml/badge.svg)
 [![PyPI version](https://badge.fury.io/py/ncs.svg)](https://pypi.org/project/rotman-ncs)
 
 The NCS package is designed for a case study in the "Machine Learning in Business" course at UoT Rotman. The goal of this project is to demonstrate the potential of Natural Language Processing (NLP) tools for extracting valuable insights from unstructured text data.
