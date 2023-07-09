@@ -27,7 +27,7 @@ jobs:
         pip install -e .
 
     - name: Build package
-      run: python -m build
+      run: python -m build --wheel
 
     - name: Check package
       run: twine check dist/*

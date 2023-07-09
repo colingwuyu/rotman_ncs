@@ -1,30 +1,36 @@
 import os
-import requests
-from tqdm import tqdm
+import zipfile
+import urllib.request
 
-def download_large_file(url, local_filename):
-    # Check if the file is already downloaded
-    if os.path.exists(local_filename):
-        return
 
-    # Send a HTTP request to the URL of the file
-    response = requests.get(url, stream=True)
+def download_and_extract(url, dest_dir_name):
+    # Get the home directory
+    if os.name == 'nt':  # For Windows
+        base_dir = os.getenv('APPDATA')
+    else:  # For Linux/OS X
+        base_dir = os.path.expanduser('~')
 
-    # Get the total size of the file
-    total_size = int(response.headers.get('content-length', 0))
+    dest_dir = os.path.join(base_dir, dest_dir_name)
 
-    # Progress bar with `tqdm`
-    progress_bar = tqdm(total=total_size, unit='iB', unit_scale=True)
+    # Create the directory if it does not exist
+    os.makedirs(dest_dir, exist_ok=True)
 
-    with open(local_filename, 'wb') as f:
-        for data in response.iter_content(chunk_size=1024):
-            # Write data read to the file
-            f.write(data)
+    # Define the paths
+    zip_path = os.path.join(dest_dir, 'ncs_data.zip')
+    data_dir = os.path.join(dest_dir, 'ncs_data')
 
-            # Update the progress bar
-            progress_bar.update(len(data))
+    # Custom function to handle block reading from url and writing to file
+    def _report(count, block_size, total_size):
+        percent = count * block_size * 100 // total_size
+        print(f'\rDownload progress: {percent}%', end='')
 
-    progress_bar.close()
+    # Download the file from url and save it locally under zip_path:
+    urllib.request.urlretrieve(url, zip_path, reporthook=_report)
+    print('\nDownload finished. Extracting files...')
 
-    if total_size != 0 and progress_bar.n != total_size:
-        print("ERROR, something went wrong")
+    # Create a ZipFile Object
+    with zipfile.ZipFile(zip_path) as zip_file:
+        # Extract all the contents of zip file in the data directory
+        zip_file.extractall(data_dir)
+
+    print(f'Data downloaded and extracted to {data_dir}')
