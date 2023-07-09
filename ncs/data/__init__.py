@@ -9,7 +9,7 @@ def data_folder():
     Retrieves the path to the data folder.
 
     The data folder is in the user's home directory on Linux (i.e. /home/username/rotman_ncs_data/ncs_data) 
-    and on Windows (i.e. C:\Users\username\AppData\Roaming\rotman_ncs_data\ncs_data).
+    and on Windows (i.e. C:\\Users\\username\\AppData\\Roaming\\rotman_ncs_data\\ncs_data).
 
     Returns:
         str: The path to the data folder.
@@ -73,10 +73,10 @@ def load_stock_history():
 def load_call_description(data_type='train'):
     """
     Load the earnings call description data from the specified data type.
-    
+
     Parameters:
         data_type (str, optional): The type of data to load (train or test). Defaults to 'train'.
-    
+
     Returns:
         DataFrame: The loaded call description data.
     """
