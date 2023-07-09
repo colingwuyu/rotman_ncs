@@ -1,5 +1,5 @@
-from ncs.data import load_stock_returns_on_calls, load_call_statements
-from ncs.model.config import default_role_weights, default_section_weights, default_statement_type_weights, default_holding_period
+from ..data import load_stock_returns_on_calls, load_call_statements
+from .config import default_role_weights, default_section_weights, default_statement_type_weights, default_holding_period
 import pandas as pd
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
@@ -27,6 +27,23 @@ def train(feature_files=[],
           holding_period=default_holding_period,
           classifier='logistic_regression',
           save_model='model.pkl'):
+    """
+    Train a model using the provided feature files and parameters.
+
+    Parameters:
+        - feature_files: A list of paths to feature files.
+        - role_weights: A dictionary of weights for different presentor roles.
+        - section_weights: A dictionary of weights for different sections.
+        - statement_type_weights: A dictionary of weights for different statement types.
+        - sell_quantile: The quantile value for determining the sell threshold. Defaults to 0.35.
+        - buy_quantile: The quantile value for determining the buy threshold. Defaults to 0.65.
+        - holding_period: The holding period for the stock return data.
+        - classifier: The type of classifier to use for training ('logistic_regression', 'random_forest', or 'neural_network'). Defaults to 'logistic_regression'.
+        - save_model: The path to save the trained model.
+
+    Returns:
+        None
+    """
     # load features
     feature_df = call_statement_data[[
         'statement_uid', 'call_uid', 'presentor_role', 'section', 'statement_type']].set_index('statement_uid')

@@ -31,10 +31,63 @@ Additional methods used for feature extraction are sentiment analysis and topic 
 
 Using the insights derived from these NLP techniques, we construct an investment strategy. This strategy uses sentiment scores, main topics, and contextual embeddings from earning calls to predict future stock returns, showing the practical application of NLP in investment decision-making. The performance of this strategy is compared to the S&P 500 index.
 
-## Code Structure
+## Python Package
 
-- The `ncs.data` module provides functions such as `load_stock_history`, `load_call_description`, and `load_call_statements` to handle data operations. The earnings call data is already split into training and testing datasets.
-- The `ncs.model` module is used to train models and make predictions from the extracted numerical features. It provides `train` and `inference` procedures.
-- The `ncs.call_strategy` module is for running the investment strategy. It evaluates the performance of the built model and strategy.
+This Python package, `rotman-ncs`, contains a suite of functions for working with financial earnings call data. The functions are broken down into three categories: data loading, model training and inference, and strategy execution and analysis.
 
-## Enjoy the Learning and Investing
+### Data Loading
+
+There are four main functions for loading different types of data:
+
+1. `load_call_description(data_type='train')`: Loads earnings call description data from the specified data type. The `data_type` parameter is a string that specifies the type of data to load, either 'train' or 'test'.
+
+2. `load_call_statements(data_type='train')`: Loads earnings call statements data from a specified data type. Again, the `data_type` parameter can be either 'train' or 'test'.
+
+3. `load_stock_history()`: Loads the stock price history data.
+
+4. `load_stock_returns_on_calls(data_type='train')`: Loads stock returns on calls data, with `data_type` specifying the type of data to load.
+
+```python
+# Load training data
+call_descriptions = ncs.load_call_description(data_type='train')
+call_statements = ncs.load_call_statements(data_type='train')
+stock_history = ncs.load_stock_history()
+stock_returns = ncs.load_stock_returns_on_calls(data_type='train')
+```
+
+### Model Training and Inference
+
+The `train` function is used to train a model using the provided feature files and parameters. The `inference` function uses the trained model to generate actions for the test set.
+
+```python
+# Train model
+ncs.train(feature_files=[list_of_feature_files])
+
+# Perform inference
+ncs.inference(feature_files=[list_of_feature_files], model_file='model.pkl', action_file='actions.csv')
+```
+
+### Strategy Execution and Analysis
+
+These functions are used to execute investment strategies and analyze their performance:
+
+1. `ncs.run_strategy(action_file, holding_period, log_file, save_portfolio_path)`: Runs the investment strategy using the provided action file, holding period, log file, and save portfolio path.
+
+2. `ncs.report_strategy_analysis(actions, portfolio, holding_period, model_name)`: Generates a report of the strategy analysis for a given set of actions and portfolio.
+
+3. `ncs.demo_benchmark(strategy, holding_period)`: Runs a benchmark strategy, either 'spy' or 'random', with a specified holding period.
+
+```python
+# Run strategy
+ncs.run_strategy(action_file='actions.csv', holding_period=5)
+
+# Generate strategy report
+ncs.report_strategy_analysis(actions='actions.csv', portfolio='portfolio.parquet', holding_period=5)
+
+# Generate benchmark strategy report
+ncs.demo_benchmark(strategy='random', holding_period=5)
+```
+
+The key dataset used in the case study is the `call_statements` DataFrame, which contains unique identifiers (`statement_uid`, `call_uid`), as well as text data (`text`, `clean_text`). The `text` field is original call transcript and the `clean_text` field is processed by several text cleaning steps. Apply different NLP models to convert them into numeric features that can be consumed by the model training functions. These features are then used to inform the investment strategies with the trained model.
+
+## Enjoy the Learning and Investing 🥳

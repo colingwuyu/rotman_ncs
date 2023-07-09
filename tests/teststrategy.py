@@ -1,7 +1,7 @@
 import os
 import unittest
 from tempfile import TemporaryDirectory as tempdir
-from ncs.call_strategy.strategy import run_strategy
+from ncs import run_strategy
 
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))

@@ -1,7 +1,7 @@
 '''
 Run evaluation on the test set
 '''
-from ncs.model.config import default_role_weights, default_section_weights, default_statement_type_weights, default_holding_period
+from .config import default_role_weights, default_section_weights, default_statement_type_weights
 import pandas as pd
 import os
 import pickle
