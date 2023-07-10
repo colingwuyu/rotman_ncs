@@ -2,6 +2,7 @@
 Run evaluation on the test set
 '''
 from .config import default_role_weights, default_section_weights, default_statement_type_weights
+from ..data import load_call_statements
 import pandas as pd
 import os
 import pickle
@@ -11,10 +12,7 @@ warnings.filterwarnings('ignore')
 
 cur_dir = os.path.dirname(os.path.realpath(__file__))
 
-call_data = pd.read_parquet(
-    f'{cur_dir}/../data/test/call_data.parquet')
-call_statement_data = pd.read_parquet(
-    f'{cur_dir}/../data/test/call_statement_data.parquet')
+call_statement_data = load_call_statements('test')
 
 
 def inference(feature_files=[],
