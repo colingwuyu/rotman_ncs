@@ -8,3 +8,6 @@ dist
 build
 *.zip
 ncs/version.py
+ncs/data/test/*
+ncs/data/train/*
+ncs/data/all_stock_price_history.parquet
