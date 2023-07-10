@@ -90,4 +90,21 @@ ncs.demo_benchmark(strategy='random', holding_period=5)
 
 The key dataset used in the case study is the `call_statements` DataFrame, which contains unique identifiers (`statement_uid`, `call_uid`), as well as text data (`text`, `clean_text`). The `text` field is original call transcript and the `clean_text` field is processed by several text cleaning steps. Apply different NLP models to convert them into numeric features that can be consumed by the model training functions. These features are then used to inform the investment strategies with the trained model.
 
+## Usage and Examples
+
+Please refer to the following notebooks for detailed examples and usage instructions:
+
+- [TF-IDF Solution Notebook](https://colab.research.google.com/drive/1JYQK1IfBEBkOKRbAnNChC-aZrQsUcfGu?usp=sharing)
+- Word2Vec Solution (Coming Soon)
+- BERT Solution (Coming Soon)
+- LLM (Language Model) Solution (Coming Soon)
+
+These notebooks demonstrate how to utilize different NLP techniques for processing text data and building investment strategies.
+
+Make sure to follow the instructions provided in each notebook for proper setup and execution of the code.
+
+If you have any questions or need further assistance, please feel free to reach out.
+
+Happy coding!
+
 ## Enjoy the Learning and Investing 🥳
