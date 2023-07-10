@@ -1,7 +1,7 @@
 import os
 import unittest
 from tempfile import TemporaryDirectory as tempdir
-from ncs import run_strategy
+import ncs
 
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
@@ -10,7 +10,7 @@ cur_dir = os.path.dirname(os.path.abspath(__file__))
 class TestRunStrategy(unittest.TestCase):
     def test_random_strategy(self):
         with tempdir() as tmp:
-            run_strategy(
+            ncs.run_strategy(
                 action_file=f'{cur_dir}/../ncs/call_strategy/random_action.csv',
                 holding_period=1,
                 log_file='',
